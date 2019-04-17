@@ -1,7 +1,10 @@
 package demos;
 
+import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -12,7 +15,7 @@ import engine.Simulator;
 
 import java.util.function.Supplier;
 
-public abstract class Demo {
+public abstract class Demo extends ApplicationAdapter {
 
   protected final Simulator simulator = new Simulator();
   protected final OrthographicCamera camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -33,9 +36,11 @@ public abstract class Demo {
   }
 
   public void onUpdate() {
+	  if (Gdx.input.isKeyPressed(0))
+		  System.out.println("abc");
   }
 
-  protected static class GdxInitializer implements ApplicationListener {
+  protected static class GdxInitializer implements ApplicationListener, InputProcessor {
 
     public final Supplier<Demo> supplier;
     private Demo demo;
@@ -43,7 +48,41 @@ public abstract class Demo {
     private GdxInitializer(Supplier<Demo> supplier) {
       this.supplier = supplier;
     }
-
+    
+	@Override public boolean mouseMoved (int screenX, int screenY) {
+		return false;
+	}
+    
+	@Override public boolean touchDown (int screenX, int screenY, int pointer, int button) {
+		return true;
+	}
+	
+	@Override public boolean touchDragged (int screenX, int screenY, int pointer) {
+		return true;
+	}
+	
+	@Override public boolean touchUp (int screenX, int screenY, int pointer, int button) {
+		return true;
+	}
+	
+	@Override public boolean keyDown (int keycode) {
+		// System.out.println(keycode);
+		return false;
+	}
+	
+	@Override public boolean keyUp (int keycode) {
+		return false;
+	}
+	
+	@Override public boolean keyTyped (char character) {
+		System.out.println(character);
+		return false;
+	}
+	
+	@Override public boolean scrolled (int amount) {
+		return false;
+	}
+	
     public static void initializeLazy(Supplier<Demo> supplier) {
       new LwjglApplication(new GdxInitializer(supplier), createDefaultConfiguration());
     }
@@ -51,6 +90,7 @@ public abstract class Demo {
     @Override
     public void create() {
       demo = supplier.get();
+      Gdx.input.setInputProcessor(this);
     }
 
     @Override

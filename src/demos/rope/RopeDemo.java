@@ -1,5 +1,7 @@
 package demos.rope;
 
+import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import demos.Demo;
 import demos.utils.DemoTextureLoader;
@@ -32,6 +34,11 @@ public class RopeDemo extends Demo {
     return IntStream.rangeClosed(-4, 4)
       .mapToObj(i -> Particle.on(0, -i * 64))
       .collect(Collectors.toList());
+  }
+  
+  public boolean keyTyped (char character) {
+	System.out.println(character);
+	return false;
   }
 
   private static Collection<Joint> createJointsBetween(Collection<Particle> particles) {
