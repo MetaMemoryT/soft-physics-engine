@@ -13,6 +13,7 @@ import demos.utils.rendering.DebugRenderer;
 import engine.Particle;
 import engine.Simulator;
 
+import java.util.ArrayList;
 import java.util.function.Supplier;
 
 public abstract class Demo extends ApplicationAdapter {
@@ -76,6 +77,13 @@ public abstract class Demo extends ApplicationAdapter {
 	
 	@Override public boolean keyTyped (char character) {
 		System.out.println(character);
+		System.out.println();
+		ArrayList<Particle> old = (ArrayList<Particle>) this.supplier.get().simulator.particles; 
+		for (Particle e : old) {
+			System.out.println(e.pos.toString() + e.prev.toString());
+		}
+		old.add(Particle.on(0, 256));
+		
 		return false;
 	}
 	
