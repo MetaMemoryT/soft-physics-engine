@@ -1,4 +1,4 @@
-package src.demo.ropenew;
+package demo.ropenew;
 
 public class Controller {
 	String location = "";
