@@ -1,23 +1,9 @@
 package demo.ropenew;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
-
-import demos.Demo.GdxInitializer;
-import demos.rope.RopeDemo;
 
 public class Input implements InputProcessor {
 
-	boolean dragging;
 	@Override public boolean mouseMoved (int screenX, int screenY) {
 		// we can also handle mouse movement without anything pressed
 //		camera.unproject(tp.set(screenX, screenY, 0));
@@ -36,7 +22,6 @@ public class Input implements InputProcessor {
 		return true;
 	}
 
-	
 	@Override public boolean keyDown (int keycode) {	
 		return false;
 	}
@@ -54,7 +39,4 @@ public class Input implements InputProcessor {
 		return false;
 	}
 	
-	public static void main (String[] arg) {
-		
-	}
 }
